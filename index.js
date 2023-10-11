@@ -1,6 +1,6 @@
-import { Tree } from './tree.js';
-import { prettyPrint } from './tree.js';
-let array = [0, 1, 2, 3, 4];
-let tree = new Tree(array);
-console.log(tree);
+import { Tree, prettyPrint } from './tree.js';
+
+let test = [0, 1, 2, 3, 4, 1, 2, 3, 5, 6, 7];
+const tree = new Tree(test);
 prettyPrint(tree.root);
+console.log(tree);

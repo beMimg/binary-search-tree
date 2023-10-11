@@ -2,12 +2,12 @@ import { Node } from './node.js';
 
 export class Tree {
   constructor(arr) {
-    this.arr = this.removeDupAndSort(arr);
-    this.root = this.buildTree(arr, 0, arr.length - 1);
+    this.arr = this.delDoblesAndOrder(arr);
+    this.root = this.buildTree(this.array, 0, this.arr.length - 1);
   }
 
-  removeDupAndSort(array) {
-    array = [...new Set(array)].sort((a, b) => a - b);
+  delDoblesAndOrder(arr) {
+    let array = [...new Set(arr)].sort((a, b) => a - b);
     return array;
   }
 
@@ -17,12 +17,12 @@ export class Tree {
     }
 
     let mid = Math.floor((start + end) / 2);
-    let node = new Node(arr[mid]);
-    console.log(node);
-    node.left = this.buildTree(arr, start, mid - 1);
-    node.right = this.buildTree(arr, mid + 1, end);
+    let root = new Node(mid);
 
-    return node;
+    root.left = this.buildTree(arr, start, mid - 1);
+    root.right = this.buildTree(arr, mid + 1, end);
+
+    return root;
   }
 }
 
