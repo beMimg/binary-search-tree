@@ -1,9 +1,9 @@
 import { Node } from './node.js';
 
-export class Tree {
+class Tree {
   constructor(arr) {
     this.arr = this.delDoblesAndOrder(arr);
-    this.root = this.buildTree(this.array, 0, this.arr.length - 1);
+    this.root = this.buildTree(this.arr);
   }
 
   delDoblesAndOrder(arr) {
@@ -11,47 +11,41 @@ export class Tree {
     return array;
   }
 
-  buildTree(arr, start, end) {
-    if (start > end) {
-      return null;
-    }
+  buildTree(arr) {
+    if (arr.length === 0) return null;
 
-    let mid = parseInt((start + end) / 2);
-    let root = new Node(this.arr[mid]);
+    let mid = Math.floor((arr.length - 1) / 2);
+    let node = new Node(arr[mid]);
 
-    root.left = this.buildTree(arr, start, mid - 1);
-    root.right = this.buildTree(arr, mid + 1, end);
+    node.left = this.buildTree(arr.slice(0, mid));
+    node.right = this.buildTree(arr.slice(mid + 1));
 
-    return root;
+    return node;
   }
 
   insert(value, root = this.root) {
-    if (root == null) {
+    /* Root is null it means the leaf (end of tree) was reached, 
+    now a new Node can be created with the value. */
+    if (root === null) {
       root = new Node(value);
+      return root;
+    }
+
+    // If the value's already on the tree, nothing to add.
+    if (root.data === value) {
       return;
     }
 
-    let current = this.root;
-    let prev = null;
-    let newNode = new Node(value);
+    if (value < root.data) {
+      root.left = this.insert(value, root.left);
+    } else {
+      root.right = this.insert(value, root.right);
+    }
 
-    while (current !== null) {
-      if (value > current.data) {
-        prev = current;
-        current = current.right;
-      } else if (value < current.data) {
-        prev = current;
-        current = current.left;
-      }
-    }
-    if (value > prev.data) {
-      prev.right = newNode;
-    } else if (value < prev.data) {
-      prev.left = newNode;
-    }
-    prettyPrint(root);
     return root;
   }
+
+  delete(value, root = this.root) {}
 }
 
 export const prettyPrint = (node, prefix = '', isLeft = true) => {
@@ -66,3 +60,5 @@ export const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
 };
+
+export default Tree;
