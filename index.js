@@ -1,8 +1,7 @@
 import Tree, { prettyPrint } from './tree.js';
 
-const arrEx = [0, 1, 2, 3];
+const arrEx = [20, 40, 32, 34, 36, 50, 70, 60, 65, 80, 75, 85];
 const tree = new Tree(arrEx);
 prettyPrint(tree.root);
 console.log(tree);
-tree.delete(2);
-tree.insert(5);
+tree.delete(50);
