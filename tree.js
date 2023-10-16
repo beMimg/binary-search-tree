@@ -45,7 +45,6 @@ class Tree {
   }
 
   #deleteNode(value, root = this.root) {
-    // Even if we reach the base case, ROOT is NULL, I still want to get the nodes before.
     if (root === null) {
       return root;
     }
@@ -75,6 +74,19 @@ class Tree {
   getMin(root = this.root) {
     if (!root.left) return root;
     else return this.getMin(root.left.data);
+  }
+
+  find(value, root = this.root) {
+    if (root === null) return root;
+
+    if (value > root.data) {
+      root.right = this.find(value, root.right);
+    } else if (value < root.data) {
+      root.left = this.find(value, root.right);
+    } else {
+      console.log(root.data);
+    }
+    return root;
   }
 }
 
