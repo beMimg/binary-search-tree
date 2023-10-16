@@ -98,7 +98,7 @@ class Tree {
     queue.push(root);
 
     let current = null;
-    let result = [];
+    let result = ['Levelorder:'];
     while (queue.length != 0) {
       current = queue.shift();
       if (current.left != null) {
@@ -113,7 +113,7 @@ class Tree {
   }
 
   preOrder(root = this.root) {
-    const resultPreOrder = [];
+    const resultPreOrder = ['Preorder:'];
     this.#getPreOrder(root, resultPreOrder);
     return resultPreOrder;
   }
@@ -126,7 +126,7 @@ class Tree {
   }
 
   inOrder(root = this.root) {
-    const resultInOrder = [];
+    const resultInOrder = ['Inorder:'];
     this.#getInOrder(root, resultInOrder);
     return resultInOrder;
   }
@@ -136,6 +136,19 @@ class Tree {
     this.#getInOrder(root.left, result);
     result.push(root.data);
     this.#getInOrder(root.right, result);
+  }
+
+  postOrder(root = this.root) {
+    let resultPostOrder = ['Postorder:'];
+    this.#getPostOrder(root, resultPostOrder);
+    return resultPostOrder;
+  }
+
+  #getPostOrder(root, result) {
+    if (root === null) return;
+    this.#getPostOrder(root.left, result);
+    this.#getPostOrder(root.right, result);
+    result.push(root.data);
   }
 }
 
