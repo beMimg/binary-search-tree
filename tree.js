@@ -98,7 +98,7 @@ class Tree {
     queue.push(root);
 
     let current = null;
-    let result = '';
+    let result = [];
     while (queue.length != 0) {
       current = queue.shift();
       if (current.left != null) {
@@ -107,9 +107,22 @@ class Tree {
       if (current.right != null) {
         queue.push(current.right);
       }
-      result += current.data + ', ';
+      result.push(current.data);
     }
     return result;
+  }
+
+  preOrder(root = this.root) {
+    let result = [];
+    this.#preOrders(root, result);
+    return result;
+  }
+
+  #preOrders(root, result) {
+    if (root == null) return;
+    result.push(root.data);
+    this.#preOrders(root.left, result);
+    this.#preOrders(root.right, result);
   }
 }
 
