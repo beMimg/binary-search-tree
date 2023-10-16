@@ -113,16 +113,29 @@ class Tree {
   }
 
   preOrder(root = this.root) {
-    let result = [];
-    this.#preOrders(root, result);
-    return result;
+    const resultPreOrder = [];
+    this.#getPreOrder(root, resultPreOrder);
+    return resultPreOrder;
   }
 
-  #preOrders(root, result) {
+  #getPreOrder(root, result) {
     if (root == null) return;
     result.push(root.data);
-    this.#preOrders(root.left, result);
-    this.#preOrders(root.right, result);
+    this.#getPreOrder(root.left, result);
+    this.#getPreOrder(root.right, result);
+  }
+
+  inOrder(root = this.root) {
+    const resultInOrder = [];
+    this.#getInOrder(root, resultInOrder);
+    return resultInOrder;
+  }
+
+  #getInOrder(root, result) {
+    if (root == null) return;
+    this.#getInOrder(root.left, result);
+    result.push(root.data);
+    this.#getInOrder(root.right, result);
   }
 }
 
