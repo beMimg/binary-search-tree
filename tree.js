@@ -150,8 +150,24 @@ class Tree {
     this.#getPostOrder(root.right, result);
     result.push(root.data);
   }
+
+  height(root = this.root) {
+    if (root === null) return -1;
+    const leftHeight = this.height(root.left);
+    const rightHeight = this.height(root.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 }
 
+// height(20)
+//   height(2) left
+//   /height(0) -1 left
+//   /height(0) -1 right
+// height(32) right
+// /height(0) -1 left
+// /height(40) right
+// height(0) -1 left
+// height(0) -1 right
 export const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return;
