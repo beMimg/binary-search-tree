@@ -45,6 +45,7 @@ class Tree {
   }
 
   #deleteNode(value, root = this.root) {
+    // Even if we reach the base case, ROOT is NULL, I still want to get the nodes before.
     if (root === null) {
       return root;
     }
@@ -65,7 +66,7 @@ class Tree {
       }
 
       root.data = this.getMin(root.right);
-      root.right = this.#deleteNode(root.data, root.right);
+      root.right = this.#deleteNode(root.data, root.right); // Deletes the old node that I've replaced.
     }
 
     return root;
@@ -73,7 +74,7 @@ class Tree {
 
   getMin(root = this.root) {
     if (!root.left) return root;
-    else return root.left.data;
+    else return this.getMin(root.left.data);
   }
 }
 
