@@ -88,6 +88,29 @@ class Tree {
     }
     return root;
   }
+
+  leverOrder(root = this.root) {
+    if (root == null) {
+      return;
+    }
+
+    let queue = [];
+    queue.push(root);
+
+    let current = null;
+    let result = '';
+    while (queue.length != 0) {
+      current = queue.shift();
+      if (current.left != null) {
+        queue.push(current.left);
+      }
+      if (current.right != null) {
+        queue.push(current.right);
+      }
+      result += current.data + ', ';
+    }
+    return result;
+  }
 }
 
 export const prettyPrint = (node, prefix = '', isLeft = true) => {
