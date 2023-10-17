@@ -95,7 +95,7 @@ class Tree {
     }
 
     const queue = [root];
-    const result = ['Levelorder:'];
+    const result = [];
 
     while (queue.length > 0) {
       const current = queue.shift();
