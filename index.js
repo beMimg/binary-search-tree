@@ -1,4 +1,4 @@
-import Tree, { prettyPrint } from './tree.js';
+import Tree from './tree.js';
 
 let tree = new Tree([1, 3, 2, 4]);
 console.log(tree);
