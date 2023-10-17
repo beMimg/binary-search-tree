@@ -89,25 +89,25 @@ class Tree {
     return root;
   }
 
-  leverOrder(root = this.root) {
-    if (root == null) {
-      return;
+  levelOrder(root = this.root) {
+    if (root === null) {
+      return [];
     }
 
-    let queue = [];
-    queue.push(root);
+    const queue = [root];
+    const result = ['Levelorder:'];
 
-    let current = null;
-    let result = ['Levelorder:'];
-    while (queue.length != 0) {
-      current = queue.shift();
-      if (current.left != null) {
+    while (queue.length > 0) {
+      const current = queue.shift();
+      result.push(current.data);
+
+      if (current.left !== null) {
         queue.push(current.left);
       }
-      if (current.right != null) {
+
+      if (current.right !== null) {
         queue.push(current.right);
       }
-      result.push(current.data);
     }
     return result;
   }
@@ -157,17 +157,28 @@ class Tree {
     const rightHeight = this.height(root.right);
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  depth(root = this.root) {
+    if (root == null) return 0;
+    let leftDepth = this.depth(root.left);
+    let rightDepth = this.depth(root.right);
+    return Math.max(leftDepth, rightDepth) + 1;
+  }
+
+  isBalanced(root = this.root) {
+    const lHeight = this.height(root.left);
+    const rHeight = this.height(root.right);
+    const diff = Math.abs(lHeight - rHeight);
+    return diff < 2 ? 'true' : 'false';
+  }
+
+  rebalance(root = this.root) {
+    const elements = this.levelOrder(root);
+
+    this.root = this.buildTree(elements, 0, elements.length - 1);
+  }
 }
 
-// height(20)
-//   height(2) left
-//   /height(0) -1 left
-//   /height(0) -1 right
-// height(32) right
-// /height(0) -1 left
-// /height(40) right
-// height(0) -1 left
-// height(0) -1 right
 export const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node === null) {
     return;
